@@ -8,12 +8,52 @@
 
   <body>
    <h1>My Disney Movie List</h1>
-   <div id="app">
-     <div v-for="mov in consoles">
-   <disney-movies v-bind:movie="mov.movie" v-bind:yr-rlsd= "mov.yrRlsd" v-bind:imdb="mov.imdb"
-   v-bind:genre="mov.genre" v-bind:duration="mov.duration" v-bind:image= "mov.image"></disney-movies>
-  </div>
+   <div id="app" v-cloak>
+     <table>
+       <thead>
+         <tr>
+           <th>Movie</th>
+           <th>Year Released</th>
+           <th>IMDb Rating</th>
+           <th>Genre</th>
+           <th>Duration</th>
+           <th>Graphic</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr is="disney-movies" v-for="mov in consoles" v-bind:movie="mov.movie" v-bind:yr-rlsd= "mov.yrRlsd" v-bind:imdb="mov.imdb"
+         v-bind:genre="mov.genre" v-bind:duration="mov.duration" v-bind:image= "mov.image"></tr>
+       </tbody>
+     </table>
    </div>
+
+
+   <form v-on:submit.prevent="submitHandler" class="new-console-form">
+    <fildset>
+      <legend>Add a console to the collection</legend>
+      <div>
+        <label for="movie">Movie</label>
+        <Input id="movie" type="text" v-model="newConsoleObj.movie">
+        </div>
+        <div>
+          <label for="yrRlsd">Year Released</label>
+          <Input id="yrRlsd" type="text" v-model="newConsoleObj.yrRlsd">
+          </div>
+          <div>
+            <label for="imdb">IMDb Rating</label>
+            <Input id="imdb" type="text" v-model="newConsoleObj.releaseDate">
+            </div>
+            <div>
+              <label for="genre">Genre</label>
+              <Input id="genre" type="text" v-model="newConsoleObj.genre">
+              </div>
+              <div>
+                <label for="duration">Duration</label>
+                <Input id="duration" type="text" v-model="newConsoleObj.duration">
+                </div>
+                <button type="submit">Submit</button>
+    </fildset>
+  </form>
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    <script src="lib/script.js"></script>
   </body>
